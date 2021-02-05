@@ -1,6 +1,6 @@
 # combinedcodonoptimisation
 
-main.py contains code to generate sequence from a given input protein sequences.
+main.py contains code to generate sequence from a given input protein sequences for multiple organisms.
 
 rarecodons.py contains a function "get_rare_codons()" which returns the rare codons for a given organism obtained from the codon tables which we can generate. This function is used in main.
 
