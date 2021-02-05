@@ -98,7 +98,7 @@ while(count<=20):
     for organism in user_organisms:
         CAI.set_cai_index(get_index(organism))
         CAI_Value += CAI.cai_for_gene(nucleotide_solution)
-    print(CAI_Value)  #generates average of cai values
+    print(CAI_Value/len(user_organisms))  #generates average of cai values
     print("\n")
     print(nucleotide_solution)
     print("\n")
