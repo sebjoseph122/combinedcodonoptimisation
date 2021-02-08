@@ -1,7 +1,7 @@
 from RareCodons import get_rare_codons
 from markovtable import get_codon_pair_freqs
-from Bio.SeqUtils.CodonUsage import CodonAdaptationIndex
-from indexes import get_index
+from CAI import CAI
+from indexesforCAI import get_index
 import random
 
 ##Function to produce DNAseq##
@@ -73,9 +73,7 @@ seq_couples = []
 for i in range(len(user_seq)-1):
     seq_couples.append(user_seq[i]+user_seq[i+1])
 
-#
 
-CAI = CodonAdaptationIndex()
 count=0
 
 #Generate 20 different sequences.
@@ -96,8 +94,7 @@ while(count<=20):
                         pair_possibilities.append(combination)
             nucleotide_solution += seq_construction(pair_possibilities, nucleotide_solution)
     for organism in user_organisms:
-        CAI.set_cai_index(get_index(organism))
-        CAI_Value += CAI.cai_for_gene(nucleotide_solution)
+        CAI_Value += CAI(nucleotide_solution, weights = get_index(organism))
     print(CAI_Value/len(user_organisms))  #generates average of cai values
     print("\n")
     print(nucleotide_solution)
