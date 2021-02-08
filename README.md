@@ -9,3 +9,5 @@ in the ribosomal proteins of a given organism.
 
 indexes.py contains a function "get_index()", which returns the the index for each organism, which is being used to
 generate a score for the sequences generate. This is generated using biopythons CAI.
+
+indexesforCAI.py contains updated indexes generated using Benjamin Lee's CAI module.
