@@ -7,7 +7,6 @@
 def get_rare_codons(organism):
     if (organism == "saccharomyces_cerevisiae"):
         rcs = ['ctc', 'tcg', 'cgc', 'cga', 'cgg']
-        rcs = ['ctt', 'ctc', 'cta', 'ctg', 'tca', 'tcg', 'agt', 'agc', 'tag', 'tga', 'ccc', 'ccg', 'cag', 'cgc', 'cga', 'cgg', 'agg', 'ata', 'aca', 'acg', 'gta', 'gtg', 'gca', 'gcg', 'gag', 'ggc', 'gga', 'ggg']
         #rare codons from rps
         #['cgc'] @0.05 threshold
     elif (organism == "yarrowia_lipolytica"):
