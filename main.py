@@ -3,7 +3,7 @@ def get_nucleotide_seq(user_organisms, user_seq):
 
     from RareCodons import get_rare_codons
     from markovtable import get_codon_pair_freqs
-    from Bio.SeqUtils.CodonUsage import CodonAdaptationIndex
+    from CAI import CAI
     from indexes import get_index
     import random
 
@@ -75,11 +75,11 @@ def get_nucleotide_seq(user_organisms, user_seq):
 
     #
 
-    CAI = CodonAdaptationIndex()
     count=0
+    generatedSeqs = []
 
     #Generate 20 different sequences.
-    while(count<=3):    
+    while(count<=100):    
         nucleotide_solution = ""
         CAI_Value = 0
         for i in range(len(seq_couples)):
@@ -96,13 +96,12 @@ def get_nucleotide_seq(user_organisms, user_seq):
                             pair_possibilities.append(combination)
                 nucleotide_solution += seq_construction(pair_possibilities, nucleotide_solution)
         for organism in user_organisms:
-            CAI.set_cai_index(get_index(organism))
-            CAI_Value = CAI.cai_for_gene(nucleotide_solution)
-            print(CAI_Value)  #generates average of cai values
-            return nucleotide_solution, CAI_Value
-        print("\n")
+            CAI_Value += CAI(nucleotide_solution, weights = get_index(organism))
+        generatedSeqs.append([nucleotide_solution, CAI_Value/len(user_organisms)])
         count= count +1
-        
+
+    generatedSeqs.sort(key=lambda x:x[1])
+    return generatedSeqs[0][0], generatedSeqs[0][1]
 
 
 
