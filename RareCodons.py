@@ -1,45 +1,35 @@
-##Lists of Organism and Respective Rare Codons##
-
-#0.1 Threshold#
-
-
+##Rare Codons from Ribosomal Proteins at x threshold##
 
 def get_rare_codons(organism):
     if (organism == "saccharomyces_cerevisiae"):
-        rcs = ['ctc', 'tcg', 'cgc', 'cga', 'cgg']
-        #rare codons from rps
-        #['cgc'] @0.05 threshold
+        ##rcs = ['ctt', 'ctc', 'cta', 'ctg', 'tca', 'tcg', 'agt', 'agc', 'tag', 'tga', 'ccc', 'ccg', 'cag', 'cgc', 'cga', 'cgg', 'agg', 'ata', 'aca', 'acg', 'gta', 'gtg', 'gca', 'gcg', 'gag', 'ggc', 'gga', 'ggg'] #0.1
+        ##rcs = ['ctc', 'ctg', 'tcg', 'agt', 'agc', 'ccc', 'ccg', 'cag', 'cgc', 'cga', 'cgg', 'agg', 'ata', 'acg', 'gta', 'gtg', 'gca', 'gcg', 'gga', 'ggg'] #0.05
+        rcs = ['ctc', 'ccg', 'cgc', 'cga', 'cgg', 'gcg', 'ggg']#0.01
     elif (organism == "yarrowia_lipolytica"):
-        rcs = ['tta', 'cta', 'tca', 'agt', 'cgc', 'agg', 'ata', 'gta', 'ggg']
-        #['tta', 'agg', 'ata'] @0.05
+        ##rcs = ['tta', 'ttg', 'cta', 'tca', 'tcg', 'agt', 'agc', 'tat', 'tag', 'tga', 'cca', 'ccg', 'cat', 'caa', 'cgt', 'cgc', 'cgg', 'aga', 'agg', 'ata', 'aca', 'acg', 'aat', 'aaa', 'gta', 'gtg', 'gca', 'gcg', 'gaa', 'ggg']#0.1
+        ##rcs = ['tta', 'ttg', 'cta', 'tca', 'tcg', 'agt', 'agc', 'tat', 'tga', 'cca', 'ccg', 'caa', 'cgt', 'cgc', 'cgg', 'aga', 'agg', 'ata', 'aca', 'acg', 'aat', 'aaa', 'gta', 'gca', 'gcg', 'gaa', 'ggg']#0.05
+        rcs = ['tta', 'ttg', 'cta', 'tca', 'agt', 'cca', 'ccg', 'cgc', 'agg', 'ata', 'aca', 'acg', 'aat', 'gta', 'gca', 'gcg', 'ggg']#0.01
     elif (organism == "aspergillus_niger"):
-        rcs = ['tta', 'cta']
-        #['tta']@0.05
+        ##rcs = ['ttt', 'tta', 'ttg', 'cta', 'tca', 'tcg', 'agt', 'tat', 'tga', 'cca', 'ccg', 'cat', 'caa', 'cga', 'cgg', 'aga', 'agg', 'ata', 'aca', 'acg', 'aat', 'aaa', 'gta', 'gtg', 'gca', 'gcg', 'gaa', 'gga', 'ggg']#0.1
+        ##rcs = ['ttt', 'tta', 'ttg', 'cta', 'tca', 'agt', 'tga', 'cca', 'ccg', 'cat', 'cga', 'cgg', 'aga', 'agg', 'ata', 'aca', 'acg', 'aat', 'aaa', 'gta', 'gca', 'gcg', 'ggg']#0.05
+        rcs = ['tta', 'cta', 'tca', 'tga', 'cga', 'ata', 'gta', 'ggg']#0.01
     elif (organism == "aspergillus_oryzae"):
-        rcs = ['tta']
-        #['tta']@0.05
+        ##rcs = ['ttt', 'tta', 'ttg', 'cta', 'tca', 'tcg', 'agt', 'tat', 'tga', 'cca', 'ccg', 'cat', 'caa', 'cga', 'cgg', 'aga', 'agg', 'ata', 'aca', 'acg', 'aat', 'aaa', 'gta', 'gtg', 'gca', 'gcg', 'gaa', 'gga', 'ggg']#0.1
+        ##rcs = ['tta', 'cta', 'tca', 'agt', 'tga', 'cca', 'ccg', 'cga', 'cgg', 'aga', 'agg', 'ata', 'aca', 'acg', 'aaa', 'gta', 'gca', 'gcg', 'ggg']#0.05
+        rcs = ['tta', 'cta', 'ata', 'gta']#0.01
+        
     elif (organism == "komagataella_pastoris"):
-        rcs = ['ctc', 'tcg', 'cgc', 'cgg', 'gcg']
-        #[]@0.05
+        ##rcs = ['tta', 'ctc', 'cta', 'tca', 'tcg', 'agt', 'agc', 'tga', 'ccc', 'ccg', 'cgc', 'cga', 'cgg', 'agg', 'ata', 'aca', 'acg', 'gta', 'gtg', 'gca', 'gcg', 'ggc', 'ggg']#0.1
+        ##rcs = ['cta', 'tcg', 'agc', 'tga', 'ccc', 'ccg', 'cgc', 'cga', 'cgg', 'agg', 'ata', 'acg', 'gta', 'gca', 'gcg', 'ggc', 'ggg']#0.05
+        rcs = ['ccg', 'cgg', 'acg', 'gcg', 'ggg']#0.01
     elif (organism == "escherichia_coli"):
-        rcs = ['cta', 'tag', 'cga', 'cgg', 'aga', 'agg', 'ata']
-        #['cta', 'aga', 'agg']
+        ##rcs = ['tta', 'ttg', 'ctt', 'ctc', 'cta', 'tca', 'tcg', 'agt', 'tag', 'ccc', 'cga', 'cgg', 'aga', 'agg', 'ata', 'aca', 'acg', 'gtc', 'gcc', 'gga', 'ggg']#0.1
+        ##rcs = ['tta', 'ttg', 'ctt', 'ctc', 'cta', 'tca', 'tcg', 'agt', 'tag', 'ccc', 'cga', 'cgg', 'aga', 'agg', 'ata', 'aca', 'gga', 'ggg']#0.05
+        rcs = ['cta', 'tag', 'cga', 'cgg', 'aga', 'agg', 'ata', 'gga']#0.01
     elif (organism == "bacillus_subtilis"):
-        rcs = ['cta', 'tcg', 'ccc', 'cga', 'agg']
-        #['cta']@0.05
+        rcs = ['tga', 'cgg', 'agg']
     elif (organism == "komagataeibacter_rhaeticus"):
-        rcs = ['ctc', 'tcg', 'cgc', 'cgg', 'gcg']
-        #[]@0.05
+        rcs = ['tta', 'cta', 'tag', 'cga', 'aga', 'agg', 'ata']#0.01
     elif (organism == "rhodosporidium_toruloides"):
-        rcs = ['tta', 'cta', 'tct', 'tca', 'agt', 'cgt', 'aga', 'ata', 'gta']
-        #['tta', 'cta', 'agt', 'aga', 'ata', 'gta'] @0.05
+        rcs = ['tta', 'cta', 'aga', 'ata']#0.01
     return rcs
-
-
-        
-        
-        
-    
-
-## removes duplicates rarecodons = list(set(saccharomyces_cerevisiae+yarrowia_lipolytica))
-

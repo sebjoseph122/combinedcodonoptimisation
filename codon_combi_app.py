@@ -71,7 +71,7 @@ if st.button("Run"):
     """)
 
     st.header('OUTPUT')
-    nuc_seq, cai_val = get_nucleotide_seq(user_organisms, user_seq)
-    st.text(nuc_seq)
-    st.text("CAI Value = " + str(cai_val))
+    nuc_seq = get_nucleotide_seq(user_organisms, user_seq)
+    st.text(nuc_seq[0])
+    st.text("CAI Values = " + str(nuc_seq[1:]))
 

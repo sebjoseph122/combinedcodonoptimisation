@@ -5,6 +5,7 @@ def get_nucleotide_seq(user_organisms, user_seq):
     from markovtable import get_codon_pair_freqs
     from CAI import CAI
     from indexes import get_index
+    from RPindexesforCAI import get_RP_index
     import random
 
     ##Function to produce DNAseq##
@@ -22,6 +23,7 @@ def get_nucleotide_seq(user_organisms, user_seq):
         else:
             temp = str(option[0])
             return temp[-3:]
+
 
 
     ##Main##
@@ -46,24 +48,45 @@ def get_nucleotide_seq(user_organisms, user_seq):
             for j in range(len(temp)):
                 codonCombinations[j][2] += temp[j][2]
 
+    for combination in codonCombinations:
+        combination[2] = combination[2]/len(user_organisms) #avr of codon pairs.
+
     #Cleans up the list of codon pairs, removing pairs with rare codons and setting 0 to 1#
     finalCodonCombinations = []
-    for combination in codonCombinations:
-        if (combination[2]==0):
-            combination[2]=1
-        else:
-            pass
-        for i in range(len(rarecodons)):
-            if (i+1<len(rarecodons)):
-                if ((combination[0][0:3]==rarecodons[i]) or (combination[0][-3:]==rarecodons[i])):
-                    break
-                else:
-                    pass
-            elif (i+1==len(rarecodons)):
-                if ((combination[0][0:3]==rarecodons[i]) or (combination[0][-3:]==rarecodons[i])):
-                    break
-                else:
-                    finalCodonCombinations.append(combination)
+
+    
+    if (len(user_organisms)==1):
+        for combination in codonCombinations:
+            if (combination[2]==0):
+                for i in range(len(rarecodons)):
+                    if (i+1<len(rarecodons)):
+                        if ((combination[0][0:3]==rarecodons[i]) or (combination[0][-3:]==rarecodons[i])):
+                            combination[2] = 0.0000001
+                        else:
+                            pass
+                    elif (i+1==len(rarecodons)):
+                        if ((combination[0][0:3]==rarecodons[i]) or (combination[0][-3:]==rarecodons[i])):
+                            combination[2] = 0.0000001
+                        else:
+                            combination[2]=0.01
+        finalCodonCombinations = codonCombinations
+    else: #More than 1 organism
+        for combination in codonCombinations:
+            if (combination[2]==0):
+                combination[2] = 0.0000001
+            else:
+                pass
+            for i in range(len(rarecodons)):
+                if (i+1<len(rarecodons)):
+                    if ((combination[0][0:3]==rarecodons[i]) or (combination[0][-3:]==rarecodons[i])):
+                        break
+                    else:
+                        pass
+                elif (i+1==len(rarecodons)):
+                    if ((combination[0][0:3]==rarecodons[i]) or (combination[0][-3:]==rarecodons[i])):
+                        break
+                    else:
+                        finalCodonCombinations.append(combination)
 
     #This will be the user input#
     user_seq = user_seq
@@ -78,10 +101,11 @@ def get_nucleotide_seq(user_organisms, user_seq):
     count=0
     generatedSeqs = []
 
-    #Generate 20 different sequences.
+    #Generate 100 different sequences.
     while(count<=100):    
         nucleotide_solution = ""
         CAI_Value = 0
+        temp = []
         for i in range(len(seq_couples)):
             pair_possibilities = []
             if i==0:
@@ -95,13 +119,16 @@ def get_nucleotide_seq(user_organisms, user_seq):
                         if combination[0][0:3]==nucleotide_solution[-3:]:
                             pair_possibilities.append(combination)
                 nucleotide_solution += seq_construction(pair_possibilities, nucleotide_solution)
+        temp.append(nucleotide_solution)
         for organism in user_organisms:
-            CAI_Value += CAI(nucleotide_solution, weights = get_index(organism))
-        generatedSeqs.append([nucleotide_solution, CAI_Value/len(user_organisms)])
+            temp.append(CAI(nucleotide_solution, weights = get_RP_index(organism)))
+            CAI_Value += CAI(nucleotide_solution, weights = get_RP_index(organism))
+        temp.append(CAI_Value/len(user_organisms))
+        generatedSeqs.append(temp)
         count= count +1
 
-    generatedSeqs.sort(key=lambda x:x[1])
-    return generatedSeqs[0][0], generatedSeqs[0][1]
+    generatedSeqs.sort(key=lambda x:x[len(user_organisms)-1], reverse=True)
+    return generatedSeqs[0]
 
 
 
